@@ -1,3 +1,5 @@
 package com.temel.platform.viewstate
 
-interface ViewState
+import android.os.Parcelable
+
+interface ViewState : Parcelable

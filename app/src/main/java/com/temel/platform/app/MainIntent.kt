@@ -1,5 +1,7 @@
 package com.temel.platform.app
 
-sealed class MainIntent {
+import com.temel.platform.viewstate.Intents
+
+sealed class MainIntent : Intents {
     class ChangeText (val textIntent: String) : MainIntent()
 }

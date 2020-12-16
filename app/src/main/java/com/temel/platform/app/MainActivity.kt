@@ -1,6 +1,7 @@
 package com.temel.platform.app
 
 import android.os.Bundle
+import android.widget.Button
 import android.widget.TextView
 import androidx.activity.viewModels
 import com.temel.platform.R
@@ -13,6 +14,8 @@ class MainActivity : CommonActivity() {
         viewModelFactory
     }
 
+    private var i = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -23,7 +26,10 @@ class MainActivity : CommonActivity() {
 
         viewModel.test()
 
-        viewModel.sendIntent(MainIntent.ChangeText("Hello world again"))
+        findViewById<Button>(R.id.button).setOnClickListener {
+            viewModel.sendIntent(MainIntent.ChangeText(i.toString()))
+            i++
+        }
     }
 
     override fun onStart() {
