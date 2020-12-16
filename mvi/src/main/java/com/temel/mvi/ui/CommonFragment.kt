@@ -1,4 +1,4 @@
-package com.temel.platform.ui
+package com.temel.mvi.ui
 
 import androidx.lifecycle.ViewModelProvider
 import dagger.android.support.DaggerFragment

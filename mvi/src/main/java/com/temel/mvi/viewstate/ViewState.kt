@@ -1,4 +1,4 @@
-package com.temel.platform.viewstate
+package com.temel.mvi.viewstate
 
 import android.os.Parcelable
 

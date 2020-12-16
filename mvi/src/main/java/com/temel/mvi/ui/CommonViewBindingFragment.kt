@@ -1,4 +1,4 @@
-package com.temel.platform.ui
+package com.temel.mvi.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater

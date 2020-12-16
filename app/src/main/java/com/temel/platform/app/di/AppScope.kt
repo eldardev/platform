@@ -1,7 +1,7 @@
-package com.temel.platform.di
+package com.temel.platform.app.di
 
 import javax.inject.Scope
 
 @Scope
 @kotlin.annotation.Retention(AnnotationRetention.RUNTIME)
-annotation class PlatformScope
+annotation class AppScope

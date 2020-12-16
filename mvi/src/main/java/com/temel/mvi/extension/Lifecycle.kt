@@ -1,9 +1,9 @@
-package com.temel.platform.extension
+package com.temel.mvi.extension
 
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
-import com.temel.platform.viewstate.ViewState
+import com.temel.mvi.viewstate.ViewState
 
 fun <L : LiveData<Throwable>> LifecycleOwner.throwable(liveData: L, body: (Throwable?) -> Unit) =
         liveData.observe(this, Observer(body))

@@ -1,11 +1,10 @@
-package com.temel.platform.viewmodel
+package com.temel.mvi.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.temel.platform.app.MainIntent
-import com.temel.platform.viewstate.Intents
-import com.temel.platform.viewstate.ViewState
+import com.temel.mvi.viewstate.Intents
+import com.temel.mvi.viewstate.ViewState
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.subjects.BehaviorSubject

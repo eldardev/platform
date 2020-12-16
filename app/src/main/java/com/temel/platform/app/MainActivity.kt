@@ -5,10 +5,10 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.activity.viewModels
 import com.temel.platform.R
-import com.temel.platform.extension.renderViewState
-import com.temel.platform.ui.CommonActivity
+import com.temel.mvi.extension.renderViewState
+import com.temel.mvi.ui.CommonActivity
 
-class MainActivity : CommonActivity() {
+class MainActivity : com.temel.mvi.ui.CommonActivity() {
 
     private val viewModel by viewModels<MainViewModel> {
         viewModelFactory

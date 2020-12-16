@@ -1,9 +1,9 @@
 package com.temel.platform.app
 
-import com.temel.platform.viewmodel.CommonViewModel
+import com.temel.mvi.viewmodel.CommonViewModel
 import javax.inject.Inject
 
-class MainViewModel @Inject constructor() : CommonViewModel<MainState, MainIntent>() {
+class MainViewModel @Inject constructor() : com.temel.mvi.viewmodel.CommonViewModel<MainState, MainIntent>() {
 
     fun test(){
         println("Test")
