@@ -40,7 +40,7 @@ abstract class CommonViewModel<VS : ViewState, I: Intents> : ViewModel() {
     val state: LiveData<VS>
         get() = _state
 
-    val viewState: VS?
+    protected val viewState: VS?
         get() = state.value
 
     protected fun updateState(viewState: VS?){

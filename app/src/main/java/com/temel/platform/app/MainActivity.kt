@@ -8,7 +8,7 @@ import com.temel.platform.R
 import com.temel.mvi.extension.renderViewState
 import com.temel.mvi.ui.CommonActivity
 
-class MainActivity : com.temel.mvi.ui.CommonActivity() {
+class MainActivity : CommonActivity() {
 
     private val viewModel by viewModels<MainViewModel> {
         viewModelFactory
