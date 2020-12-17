@@ -4,4 +4,4 @@ import com.temel.mvi.viewstate.ViewState
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class MainState(var text: String) : com.temel.mvi.viewstate.ViewState
+data class MainState(var text: String, var isLoading: Boolean  = false) : ViewState

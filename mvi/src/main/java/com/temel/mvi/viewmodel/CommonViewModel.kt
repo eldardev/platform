@@ -8,6 +8,8 @@ import com.temel.mvi.viewstate.ViewState
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.subjects.BehaviorSubject
+import io.reactivex.subjects.PublishSubject
+import io.reactivex.subjects.ReplaySubject
 
 abstract class CommonViewModel<VS : ViewState, I: Intents> : ViewModel() {
     /**
@@ -30,14 +32,21 @@ abstract class CommonViewModel<VS : ViewState, I: Intents> : ViewModel() {
      */
     private val _state: MutableLiveData<VS> =
         MutableLiveData<VS>().apply {
-            this.value = null
+            this.value = initViewState()
         }
+
+    abstract fun initViewState(): VS
 
     val state: LiveData<VS>
         get() = _state
 
-    protected fun updateState(viewState: VS){
-        _state.postValue(viewState)
+    val viewState: VS?
+        get() = state.value
+
+    protected fun updateState(viewState: VS?){
+        viewState?.let {
+            _state.postValue(viewState)
+        }
     }
 
     /**

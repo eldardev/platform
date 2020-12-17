@@ -14,7 +14,7 @@ class MainActivity : com.temel.mvi.ui.CommonActivity() {
         viewModelFactory
     }
 
-    private var i = 0
+    private var i = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,10 +24,13 @@ class MainActivity : com.temel.mvi.ui.CommonActivity() {
     override fun onResume() {
         super.onResume()
 
-        viewModel.test()
-
         findViewById<Button>(R.id.button).setOnClickListener {
-            viewModel.sendIntent(MainIntent.ChangeText(i.toString()))
+            if (i % 2 == 0) {
+                viewModel.sendIntent(MainIntent.ChangeText(i.toString()))
+//                viewModel.sendIntent(MainIntent.SetIsLoading(false))
+            }else {
+                viewModel.sendIntent(MainIntent.SetIsLoading(true))
+            }
             i++
         }
     }
@@ -37,6 +40,7 @@ class MainActivity : com.temel.mvi.ui.CommonActivity() {
 
         renderViewState(viewModel.state, {
             findViewById<TextView>(R.id.text_hello_world).text = it?.text
+            findViewById<TextView>(R.id.text_is_loading).text = it?.isLoading.toString()
         })
     }
 }
