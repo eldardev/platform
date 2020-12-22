@@ -26,10 +26,10 @@ class MainActivity : CommonActivity() {
 
         findViewById<Button>(R.id.button).setOnClickListener {
             if (i % 2 == 0) {
-                viewModel.sendIntent(MainIntent.ChangeText(i.toString()))
-//                viewModel.sendIntent(MainIntent.SetIsLoading(false))
+                viewModel.sendAction(MainViewModel.MainAction.ChangeText(i.toString()))
+                viewModel.sendAction(MainViewModel.MainAction.SetIsLoading(false))
             }else {
-                viewModel.sendIntent(MainIntent.SetIsLoading(true))
+                viewModel.sendAction(MainViewModel.MainAction.SetIsLoading(true))
             }
             i++
         }

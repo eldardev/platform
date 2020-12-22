@@ -1,3 +1,3 @@
 package com.temel.mvi.viewstate
 
-interface Intents
+interface Action
