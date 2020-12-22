@@ -14,7 +14,7 @@ abstract class MainModule {
 
     @Binds
     @IntoMap
-    @com.temel.mvi.di.ViewModelKey(MainViewModel::class)
+    @ViewModelKey(MainViewModel::class)
     abstract fun bindViewModel(viewmodel: MainViewModel): ViewModel
 
     @ContributesAndroidInjector
