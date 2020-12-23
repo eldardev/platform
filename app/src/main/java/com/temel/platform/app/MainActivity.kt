@@ -26,9 +26,14 @@ class MainActivity : CommonActivity() {
 
         findViewById<Button>(R.id.button).setOnClickListener {
             if (i % 2 == 0) {
-                viewModel.sendAction(MainViewModel.MainAction.ChangeText(i.toString()))
-                viewModel.sendAction(MainViewModel.MainAction.SetIsLoading(false))
+                val list = listOf(
+                    MainViewModel.MainAction.ChangeText(i.toString()),
+                    MainViewModel.MainAction.SetIsLoading(false)
+                )
+
+                viewModel.sendSideEffect(list)
             }else {
+                viewModel.sendAction(MainViewModel.MainAction.ChangeText(i.toString()))
                 viewModel.sendAction(MainViewModel.MainAction.SetIsLoading(true))
             }
             i++

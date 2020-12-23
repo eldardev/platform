@@ -19,7 +19,7 @@ class MainViewModel @Inject constructor() :
                          var isLoading: Boolean  = false) : ViewState
 
     override fun initViewState(): MainState {
-        return MainState("", false)
+        return MainState("0", false)
     }
 
     override fun reduce(action: MainAction, state: MainState): MainState {
