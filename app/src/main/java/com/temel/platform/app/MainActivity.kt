@@ -1,6 +1,5 @@
 package com.temel.platform.app
 
-import android.opengl.Visibility
 import android.os.Bundle
 import android.view.View.GONE
 import android.view.View.VISIBLE
@@ -44,14 +43,17 @@ class MainActivity : CommonActivity() {
         renderViewState(viewModel.state, {
             val progress = findViewById<ProgressBar>(R.id.progress_bar)
             val textView = findViewById<TextView>(R.id.text_hello_world)
-            if (it?.isLoading!!){
-                progress.visibility = VISIBLE
 
-                return@renderViewState
+            it?.let {
+                if(it.isLoading) {
+                    progress.visibility = VISIBLE
+                    textView.text = ""
+                }else{
+                    progress.visibility = GONE
+                    textView.text = it.text
+                }
             }
 
-            progress.visibility = GONE
-            textView.text = it.text
         })
     }
 }

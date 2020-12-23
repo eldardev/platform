@@ -9,20 +9,27 @@ abstract class StoreViewModel<A : Action, VS : ViewState> : ActionViewModel<A, V
     abstract fun reduce(action: A, state: VS): VS
 
     init {
-        action.subscribe { intent ->
+        action.subscribe { action ->
             viewState?.let { state ->
-                updateState(reduce(intent, state))
+                updateState(reduce(action, state))
             }
         }.disposeLater()
 
-        sideEffects.subscribe {
+        actions.subscribe {
             viewState?.let { state ->
                 Observable.fromIterable(it)
-                    .distinctUntilChanged()
                     .subscribe { action ->
-                    updateState(reduce(action, state))
-                }.disposeLater()
+                        updateState(reduce(action, state))
+                    }.disposeLater()
             }
+        }.disposeLater()
+
+        sideEffect.subscribe {
+            it().subscribe { action ->
+                viewState?.let { state ->
+                    updateState(reduce(action, state))
+                }
+            }.disposeLater()
         }.disposeLater()
     }
 }
