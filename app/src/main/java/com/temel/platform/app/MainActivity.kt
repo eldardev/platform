@@ -1,7 +1,11 @@
 package com.temel.platform.app
 
+import android.opengl.Visibility
 import android.os.Bundle
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.widget.Button
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.activity.viewModels
 import com.temel.platform.R
@@ -24,19 +28,13 @@ class MainActivity : CommonActivity() {
     override fun onResume() {
         super.onResume()
 
-        findViewById<Button>(R.id.button).setOnClickListener {
-            if (i % 2 == 0) {
-                val list = listOf(
-                    MainViewModel.MainAction.ChangeText(i.toString()),
-                    MainViewModel.MainAction.SetIsLoading(false)
-                )
+//        val list = listOf(
+//            MainViewModel.MainAction.ChangeText(i.toString()),
+//            MainViewModel.MainAction.SetIsLoading(false)
+//        )
 
-                viewModel.sendSideEffect(list)
-            }else {
-                viewModel.sendAction(MainViewModel.MainAction.ChangeText(i.toString()))
-                viewModel.sendAction(MainViewModel.MainAction.SetIsLoading(true))
-            }
-            i++
+        findViewById<Button>(R.id.button).setOnClickListener {
+            viewModel.getFacts()
         }
     }
 
@@ -44,8 +42,16 @@ class MainActivity : CommonActivity() {
         super.onStart()
 
         renderViewState(viewModel.state, {
-            findViewById<TextView>(R.id.text_hello_world).text = it?.text
-            findViewById<TextView>(R.id.text_is_loading).text = it?.isLoading.toString()
+            val progress = findViewById<ProgressBar>(R.id.progress_bar)
+            val textView = findViewById<TextView>(R.id.text_hello_world)
+            if (it?.isLoading!!){
+                progress.visibility = VISIBLE
+
+                return@renderViewState
+            }
+
+            progress.visibility = GONE
+            textView.text = it.text
         })
     }
 }
