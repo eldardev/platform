@@ -91,4 +91,7 @@ dependencies {
 
     //Kotlin
     implementation "androidx.fragment:fragment-ktx:$fragmentKtxVersion"
+
+    //Leak Canary
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.6'
 }
