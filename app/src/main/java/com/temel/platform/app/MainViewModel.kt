@@ -44,6 +44,8 @@ class MainViewModel @Inject constructor(private var getCatsFactsUseCase: GetCats
     }
 
     fun getFacts() {
+        setThrowable(Exception("vfdnvdfjnvjdfnv"))
+
         sendAction(test())
     }
 
@@ -51,6 +53,9 @@ class MainViewModel @Inject constructor(private var getCatsFactsUseCase: GetCats
         return getCatsFactsUseCase.invoke(Unit)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
+            .doOnError {
+                setThrowable(it)
+            }
             .map<MainAction> {
                 MainAction.ChangeText(it.toString())
             }

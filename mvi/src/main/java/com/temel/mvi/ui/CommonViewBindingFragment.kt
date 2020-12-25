@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.ViewBinding
+import com.temel.mvi.extension.throwable
+import com.temel.mvi.viewmodel.CommonViewModel
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
@@ -32,4 +34,20 @@ abstract class CommonViewBindingFragment<ViewBindingType> :
 
         return _binding!!.root
     }
+
+    abstract val viewModel : CommonViewModel
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        throwable(viewModel.throwable, {
+            it?.let {
+                handleThrowable(it)
+
+                viewModel.throwable.value = null
+            }
+        })
+    }
+
+    abstract fun handleThrowable(throwable: Throwable)
 }

@@ -7,13 +7,15 @@ import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.activity.viewModels
+import androidx.lifecycle.ViewModel
 import com.temel.platform.R
 import com.temel.mvi.extension.renderViewState
+import com.temel.mvi.extension.throwable
 import com.temel.mvi.ui.CommonActivity
 
 class MainActivity : CommonActivity() {
 
-    private val viewModel by viewModels<MainViewModel> {
+    override val viewModel by viewModels<MainViewModel> {
         viewModelFactory
     }
 
@@ -55,5 +57,9 @@ class MainActivity : CommonActivity() {
             }
 
         })
+    }
+
+    override fun handleThrowable(throwable: Throwable) {
+        println(throwable.localizedMessage)
     }
 }
