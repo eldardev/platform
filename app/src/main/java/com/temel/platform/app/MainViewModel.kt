@@ -1,6 +1,5 @@
 package com.temel.platform.app
 
-import com.temel.mvi.viewmodel.SideEffect
 import com.temel.mvi.viewmodel.StoreViewModel
 import com.temel.mvi.viewstate.Action
 import com.temel.mvi.viewstate.ViewState
@@ -45,16 +44,10 @@ class MainViewModel @Inject constructor(private var getCatsFactsUseCase: GetCats
     }
 
     fun getFacts() {
-        val effect: SideEffect<MainAction> = {
-            test()
-        }
-
-        sendSideEffect(effect)
-
-        val sideEffects = listOf<SideEffect<MainAction>>(effect)
+        sendAction(test())
     }
 
-    fun test(): Observable<MainAction> {
+    private fun test(): Observable<MainAction> {
         return getCatsFactsUseCase.invoke(Unit)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

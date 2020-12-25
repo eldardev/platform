@@ -8,7 +8,7 @@ import io.reactivex.subjects.BehaviorSubject
 abstract class ActionViewModel<A : Action, VS : ViewState> : StateViewModel<VS>() {
     internal val action = BehaviorSubject.create<A>()
     internal val actions = BehaviorSubject.create<List<A>>()
-    internal val sideEffect = BehaviorSubject.create<SideEffect<A>>()
+    internal val observable = BehaviorSubject.create<Observable<A>>()
 
     fun sendAction(action: A) {
         this.action.onNext(action)
@@ -18,7 +18,7 @@ abstract class ActionViewModel<A : Action, VS : ViewState> : StateViewModel<VS>(
         this.actions.onNext(list)
     }
 
-    fun sendSideEffect(sideEffect: SideEffect<A>) {
-        this.sideEffect.onNext(sideEffect)
+    fun sendAction(observable: Observable<A>){
+        this.observable.onNext(observable)
     }
 }
