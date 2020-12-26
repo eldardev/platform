@@ -7,10 +7,8 @@ import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.activity.viewModels
-import androidx.lifecycle.ViewModel
 import com.temel.platform.R
 import com.temel.mvi.extension.renderViewState
-import com.temel.mvi.extension.throwable
 import com.temel.mvi.ui.CommonActivity
 
 class MainActivity : CommonActivity() {
@@ -29,13 +27,8 @@ class MainActivity : CommonActivity() {
     override fun onResume() {
         super.onResume()
 
-//        val list = listOf(
-//            MainViewModel.MainAction.ChangeText(i.toString()),
-//            MainViewModel.MainAction.SetIsLoading(false)
-//        )
-
         findViewById<Button>(R.id.button).setOnClickListener {
-            viewModel.getFacts()
+            viewModel.sendCommand(MainViewModel.MainCommand.FetchFacts)
         }
     }
 

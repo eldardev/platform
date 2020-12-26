@@ -2,6 +2,7 @@ package com.temel.platform.app
 
 import com.temel.mvi.viewmodel.StoreViewModel
 import com.temel.mvi.viewstate.Action
+import com.temel.mvi.viewstate.Command
 import com.temel.mvi.viewstate.ViewState
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -10,11 +11,17 @@ import kotlinx.android.parcel.Parcelize
 import javax.inject.Inject
 
 class MainViewModel @Inject constructor(private var getCatsFactsUseCase: GetCatsFactsUseCase) :
-    StoreViewModel<MainViewModel.MainAction, MainViewModel.MainState>() {
+    StoreViewModel<MainViewModel.MainAction,
+            MainViewModel.MainCommand,
+            MainViewModel.MainState>() {
 
     sealed class MainAction : Action {
         class ChangeText(val text: String) : MainAction()
         class SetLoading(val isLoading: Boolean) : MainAction()
+    }
+
+    sealed class MainCommand : Command {
+        object FetchFacts : MainCommand()
     }
 
     @Parcelize
@@ -43,13 +50,13 @@ class MainViewModel @Inject constructor(private var getCatsFactsUseCase: GetCats
         }
     }
 
-    fun getFacts() {
-        setThrowable(Exception("vfdnvdfjnvjdfnv"))
+//    override fun call(command: MainCommand): Observable<MainAction> {
+//        return when (command) {
+//            is MainCommand.FetchFacts -> getFacts()
+//        }
+//    }
 
-        sendAction(test())
-    }
-
-    private fun test(): Observable<MainAction> {
+    private fun getFacts(state: MainState): Observable<MainAction> {
         return getCatsFactsUseCase.invoke(Unit)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -61,5 +68,11 @@ class MainViewModel @Inject constructor(private var getCatsFactsUseCase: GetCats
             }
             .toObservable()
             .startWith(MainAction.SetLoading(true))
+    }
+
+    override fun call(command: MainCommand): (MainState) -> Observable<MainAction> {
+        return when (command) {
+            is MainCommand.FetchFacts -> ::getFacts
+        }
     }
 }

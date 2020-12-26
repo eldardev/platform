@@ -1,24 +1,19 @@
 package com.temel.mvi.viewmodel
 
 import com.temel.mvi.viewstate.Action
+import com.temel.mvi.viewstate.Command
 import com.temel.mvi.viewstate.ViewState
-import io.reactivex.Observable
 import io.reactivex.subjects.BehaviorSubject
 
-abstract class ActionViewModel<A : Action, VS : ViewState> : StateViewModel<VS>() {
+abstract class ActionViewModel<A : Action, C : Command, VS : ViewState> : StateViewModel<VS>() {
     internal val action = BehaviorSubject.create<A>()
-    internal val actions = BehaviorSubject.create<List<A>>()
-    internal val observable = BehaviorSubject.create<Observable<A>>()
+    internal val command = BehaviorSubject.create<C>()
 
     fun sendAction(action: A) {
         this.action.onNext(action)
     }
 
-    fun sendAction(list: List<A>) {
-        this.actions.onNext(list)
-    }
-
-    fun sendAction(observable: Observable<A>){
-        this.observable.onNext(observable)
+    fun sendCommand(command: C) {
+        this.command.onNext(command)
     }
 }
