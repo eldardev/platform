@@ -1,18 +1,20 @@
-package com.temel.mvi.ui
+package com.temel.mvi.ui.activity
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.ViewBinding
 import com.temel.mvi.extension.throwable
 import com.temel.mvi.viewmodel.CommonViewModel
-import dagger.android.support.DaggerFragment
+import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
 
-abstract class CommonViewBindingFragment<ViewBindingType> :
-    DaggerFragment() where  ViewBindingType : ViewBinding {
+abstract class CommonViewBindingActivity<ViewBindingType> :
+    DaggerAppCompatActivity()
+        where ViewBindingType : ViewBinding{
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
 
     protected abstract val bindingInflater: (LayoutInflater) -> ViewBindingType
 
@@ -22,23 +24,19 @@ abstract class CommonViewBindingFragment<ViewBindingType> :
     protected val binding: ViewBindingType
         get() = _binding as ViewBindingType
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        _binding = bindingInflater(inflater)
+        _binding = bindingInflater(layoutInflater)
+        val view = _binding!!.root
 
-        return _binding!!.root
+        setContentView(view)
     }
 
     abstract val viewModel : CommonViewModel
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onStart() {
+        super.onStart()
 
         throwable(viewModel.throwable, {
             it?.let {

@@ -1,20 +1,21 @@
-package com.temel.mvi.ui
+package com.temel.mvi.ui.fragment
 
+import android.os.Bundle
+import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import com.temel.mvi.extension.throwable
 import com.temel.mvi.viewmodel.CommonViewModel
-import dagger.android.support.DaggerAppCompatActivity
+import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
-abstract class CommonActivity : DaggerAppCompatActivity(){
-
+abstract class CommonFragment : DaggerFragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
     abstract val viewModel : CommonViewModel
 
-    override fun onStart() {
-        super.onStart()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         throwable(viewModel.throwable, {
             it?.let {

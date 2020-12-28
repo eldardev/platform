@@ -3,17 +3,17 @@ package com.temel.platform.app
 import com.temel.mvi.viewmodel.StoreViewModel
 import com.temel.mvi.viewstate.Action
 import com.temel.mvi.viewstate.Command
-import com.temel.mvi.viewstate.ViewState
+import com.temel.platform.MainState
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.parcel.Parcelize
 import javax.inject.Inject
 
-class MainViewModel @Inject constructor(private var getCatsFactsUseCase: GetCatsFactsUseCase) :
+class MainViewModel @Inject constructor(
+    private var getCatsFactsUseCase: GetCatsFactsUseCase) :
     StoreViewModel<MainViewModel.MainAction,
             MainViewModel.MainCommand,
-            MainViewModel.MainState>() {
+            MainState>() {
 
     sealed class MainAction : Action {
         class ChangeText(val text: String) : MainAction()
@@ -22,16 +22,6 @@ class MainViewModel @Inject constructor(private var getCatsFactsUseCase: GetCats
 
     sealed class MainCommand : Command {
         object FetchFacts : MainCommand()
-    }
-
-    @Parcelize
-    data class MainState(
-        var text: String,
-        var isLoading: Boolean
-    ) : ViewState
-
-    override fun initViewState(): MainState {
-        return MainState("0", false)
     }
 
     override fun reduce(action: MainAction, state: MainState): MainState {
@@ -44,17 +34,18 @@ class MainViewModel @Inject constructor(private var getCatsFactsUseCase: GetCats
             }
             is MainAction.SetLoading -> {
                 state.apply {
+                    text = ""
                     isLoading = action.isLoading
                 }
             }
         }
     }
 
-//    override fun call(command: MainCommand): Observable<MainAction> {
-//        return when (command) {
-//            is MainCommand.FetchFacts -> getFacts()
-//        }
-//    }
+    override fun call(command: MainCommand): (MainState) -> Observable<MainAction> {
+        return when (command) {
+            is MainCommand.FetchFacts -> ::getFacts
+        }
+    }
 
     private fun getFacts(state: MainState): Observable<MainAction> {
         return getCatsFactsUseCase.invoke(Unit)
@@ -68,11 +59,5 @@ class MainViewModel @Inject constructor(private var getCatsFactsUseCase: GetCats
             }
             .toObservable()
             .startWith(MainAction.SetLoading(true))
-    }
-
-    override fun call(command: MainCommand): (MainState) -> Observable<MainAction> {
-        return when (command) {
-            is MainCommand.FetchFacts -> ::getFacts
-        }
     }
 }

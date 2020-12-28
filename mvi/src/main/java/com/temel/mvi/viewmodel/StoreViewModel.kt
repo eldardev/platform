@@ -10,22 +10,21 @@ abstract class StoreViewModel<A : Action, C : Command, VS : ViewState> :
 
     abstract fun reduce(action: A, state: VS): VS
 
-    abstract fun call(command: C): (VS) ->Observable<A>
+    abstract fun call(command: C): (VS) -> Observable<A>
 
     init {
         action.subscribe { action ->
-            viewState?.let { state ->
+            state.value?.let { state ->
                 updateState(reduce(action, state))
             }
         }.disposeLater()
 
         command.subscribe { c ->
-            call(c)(viewState!!).subscribe {
-                action.onNext(it)
-            }.disposeLater()
-//            call(c).subscribe { a ->
-//                action.onNext(a)
-//            }.disposeLater()
+            state.value?.let {
+                call(c)(it).subscribe { a ->
+                    action.onNext(a)
+                }.disposeLater()
+            }
         }.disposeLater()
     }
 }

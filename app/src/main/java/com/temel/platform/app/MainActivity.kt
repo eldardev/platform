@@ -8,10 +8,14 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.activity.viewModels
 import com.temel.platform.R
-import com.temel.mvi.extension.renderViewState
-import com.temel.mvi.ui.CommonActivity
+import com.temel.mvi.ui.activity.StateActivity
+import com.temel.platform.AppState
+import com.temel.platform.MainState
+import javax.inject.Inject
 
-class MainActivity : CommonActivity() {
+class MainActivity : StateActivity<MainState>() {
+
+    @Inject lateinit var appState: AppState
 
     override val viewModel by viewModels<MainViewModel> {
         viewModelFactory
@@ -32,27 +36,23 @@ class MainActivity : CommonActivity() {
         }
     }
 
-    override fun onStart() {
-        super.onStart()
-
-        renderViewState(viewModel.state, {
-            val progress = findViewById<ProgressBar>(R.id.progress_bar)
-            val textView = findViewById<TextView>(R.id.text_hello_world)
-
-            it?.let {
-                if(it.isLoading) {
-                    progress.visibility = VISIBLE
-                    textView.text = ""
-                }else{
-                    progress.visibility = GONE
-                    textView.text = it.text
-                }
-            }
-
-        })
-    }
-
     override fun handleThrowable(throwable: Throwable) {
         println(throwable.localizedMessage)
     }
+
+    override fun onNewState(state: MainState) {
+        val progress = findViewById<ProgressBar>(R.id.progress_bar)
+        val textView = findViewById<TextView>(R.id.text_hello_world)
+
+        if(state.isLoading) {
+            progress.visibility = VISIBLE
+            textView.text = ""
+        }else{
+            progress.visibility = GONE
+            textView.text = state.text
+        }
+    }
+
+    override val state: MainState
+        get() = appState.mainState
 }
