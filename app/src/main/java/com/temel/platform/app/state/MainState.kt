@@ -1,4 +1,4 @@
-package com.temel.platform
+package com.temel.platform.app.state
 
 import com.temel.mvi.viewstate.ViewState
 import kotlinx.android.parcel.Parcelize

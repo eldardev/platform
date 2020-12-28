@@ -1,7 +1,8 @@
-package com.temel.platform.app
+package com.temel.platform.app.usecase
 
 import com.temel.mvi.usecase.SingleUseCase
-import com.temel.platform.ApiClient
+import com.temel.platform.app.api.ApiClient
+import com.temel.platform.app.api.CatsService
 import com.temel.platform.app.entity.Fact
 import io.reactivex.Single
 import javax.inject.Inject

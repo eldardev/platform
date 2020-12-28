@@ -1,7 +1,7 @@
 package com.temel.platform.app.di
 
-import com.temel.platform.AppState
-import com.temel.platform.MainState
+import com.temel.platform.app.state.AppState
+import com.temel.platform.app.state.MainState
 import dagger.Module
 import dagger.Provides
 
@@ -10,13 +10,13 @@ class StatesModule {
 
     @AppScope
     @Provides
-    fun mainState(): MainState{
-        return MainState("Initial State", false)
+    fun appState(mainState: MainState): AppState {
+        return AppState(mainState)
     }
 
     @AppScope
     @Provides
-    fun appState(mainState: MainState): AppState{
-        return AppState(mainState)
+    fun mainState(): MainState {
+        return MainState("Initial State", false)
     }
 }

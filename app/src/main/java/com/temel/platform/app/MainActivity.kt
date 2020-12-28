@@ -9,8 +9,8 @@ import android.widget.TextView
 import androidx.activity.viewModels
 import com.temel.platform.R
 import com.temel.mvi.ui.activity.StateActivity
-import com.temel.platform.AppState
-import com.temel.platform.MainState
+import com.temel.platform.app.state.AppState
+import com.temel.platform.app.state.MainState
 import javax.inject.Inject
 
 class MainActivity : StateActivity<MainState>() {

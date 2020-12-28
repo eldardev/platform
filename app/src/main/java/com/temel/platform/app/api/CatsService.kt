@@ -1,4 +1,4 @@
-package com.temel.platform.app
+package com.temel.platform.app.api
 
 import com.temel.platform.app.entity.Fact
 import io.reactivex.Single

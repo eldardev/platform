@@ -3,14 +3,16 @@ package com.temel.platform.app
 import com.temel.mvi.viewmodel.StoreViewModel
 import com.temel.mvi.viewstate.Action
 import com.temel.mvi.viewstate.Command
-import com.temel.platform.MainState
+import com.temel.platform.app.state.MainState
+import com.temel.platform.app.usecase.GetCatsFactsUseCase
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class MainViewModel @Inject constructor(
-    private var getCatsFactsUseCase: GetCatsFactsUseCase) :
+    private var getCatsFactsUseCase: GetCatsFactsUseCase
+) :
     StoreViewModel<MainViewModel.MainAction,
             MainViewModel.MainCommand,
             MainState>() {

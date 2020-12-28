@@ -1,18 +1,21 @@
-package com.temel.mvi.ui.activity
+package com.temel.mvi.ui.fragment
 
+import android.os.Bundle
+import android.view.View
 import com.temel.mvi.extension.renderViewState
 import com.temel.mvi.extension.throwable
 import com.temel.mvi.viewmodel.StateViewModel
 import com.temel.mvi.viewstate.ViewState
+import dagger.android.support.DaggerFragment
 
-abstract class StateActivity<VS : ViewState> : CommonActivity() {
+abstract class StateFragment<VS: ViewState> : DaggerFragment() {
 
-    abstract val viewModel: StateViewModel<VS>
+    abstract val viewModel : StateViewModel<VS>
 
     abstract val state: VS
 
-    override fun onStart() {
-        super.onStart()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         throwable(viewModel.throwable, {
             it?.let {

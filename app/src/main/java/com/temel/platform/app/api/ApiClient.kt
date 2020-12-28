@@ -1,4 +1,4 @@
-package com.temel.platform
+package com.temel.platform.app.api
 
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
