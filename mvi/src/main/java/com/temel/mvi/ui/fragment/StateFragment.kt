@@ -31,7 +31,7 @@ abstract class StateFragment<VS: ViewState> : DaggerFragment() {
             }
         })
 
-        viewModel.selectState(state)
+        viewModel.state.value = state
     }
 
     abstract fun onNewState(state: VS)

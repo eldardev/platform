@@ -28,7 +28,7 @@ abstract class StateActivity<VS : ViewState> : CommonActivity() {
             }
         })
 
-        viewModel.selectState(state)
+        viewModel.state.value = state
     }
 
     abstract fun onNewState(state: VS)
