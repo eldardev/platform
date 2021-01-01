@@ -1,8 +1,6 @@
 package com.temel.platform.app
 
 import com.temel.mvi.viewmodel.StoreViewModel
-import com.temel.mvi.viewstate.Action
-import com.temel.mvi.viewstate.Command
 import com.temel.platform.app.state.MainState
 import com.temel.platform.app.usecase.GetCatsFactsUseCase
 import io.reactivex.Observable
@@ -13,18 +11,9 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(
     private var getCatsFactsUseCase: GetCatsFactsUseCase
 ) :
-    StoreViewModel<MainViewModel.MainAction,
-            MainViewModel.MainCommand,
+    StoreViewModel<MainAction,
+            MainCommand,
             MainState>() {
-
-    sealed class MainAction : Action {
-        class ChangeText(val text: String) : MainAction()
-        class SetLoading(val isLoading: Boolean) : MainAction()
-    }
-
-    sealed class MainCommand : Command {
-        object FetchFacts : MainCommand()
-    }
 
     override fun reduce(action: MainAction, state: MainState): MainState {
         return when (action) {
