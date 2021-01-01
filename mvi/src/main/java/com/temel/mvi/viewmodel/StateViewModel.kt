@@ -8,9 +8,12 @@ open class StateViewModel<VS : ViewState> : CommonViewModel() {
     internal val state: LiveData<VS>
         get() = mutableState
 
-    //ВРЕМЕННО
-    val mutableState: MutableLiveData<VS> =
+    internal val mutableState: MutableLiveData<VS> =
         MutableLiveData<VS>().apply {
             this.value = null
         }
+
+    fun initState(state: VS){
+        mutableState.value = state
+    }
 }

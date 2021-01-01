@@ -1,14 +1,14 @@
 package com.temel.platform.app
 
-import com.temel.mvi.viewmodel.Reducer
+import com.temel.mvi.viewmodel.StateMachine
 import com.temel.platform.app.usecase.GetCatsFactsUseCase
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class MainReducer @Inject constructor(private var getCatsFactsUseCase: GetCatsFactsUseCase) :
-    Reducer<MainAction, MainCommand, MainState> {
+class MainStateMachine @Inject constructor(private var getCatsFactsUseCase: GetCatsFactsUseCase) :
+    StateMachine<MainAction, MainCommand, MainState> {
 
     override fun reduce(state: MainState, action: MainAction, ): MainState {
         return when (action) {

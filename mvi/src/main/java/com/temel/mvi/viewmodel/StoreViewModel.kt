@@ -8,10 +8,11 @@ import io.reactivex.subjects.BehaviorSubject
 abstract class StoreViewModel<A : Action, C : Command, VS : ViewState> :
     StateViewModel<VS>() {
 
-    private val action = BehaviorSubject.create<A>()
-    private val command = BehaviorSubject.create<C>()
+    abstract val stateMachine: StateMachine<A, C, VS>
 
-    abstract val reducer: Reducer<A, C, VS>
+    private val action = BehaviorSubject.create<A>()
+
+    private val command = BehaviorSubject.create<C>()
 
     fun dispatch(action: A) {
         this.action.onNext(action)
@@ -24,13 +25,13 @@ abstract class StoreViewModel<A : Action, C : Command, VS : ViewState> :
     init {
         action.subscribe { action ->
             state.value?.let { state ->
-                mutableState.postValue(reducer.reduce(state, action))
+                mutableState.postValue(stateMachine.reduce(state, action))
             }
         }.disposeLater()
 
         command.subscribe { c ->
             state.value?.let {
-                reducer.call(c)(it).subscribe { a ->
+                stateMachine.call(c)(it).subscribe { a ->
                     action.onNext(a)
                 }.disposeLater()
             }
