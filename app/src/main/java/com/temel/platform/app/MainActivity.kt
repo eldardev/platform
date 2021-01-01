@@ -32,7 +32,7 @@ class MainActivity : StateActivity<MainState>() {
         super.onResume()
 
         findViewById<Button>(R.id.button).setOnClickListener {
-            viewModel.sendCommand(MainViewModel.MainCommand.FetchFacts)
+            viewModel.sendCommand(MainCommand.FetchFacts)
         }
     }
 
@@ -52,7 +52,4 @@ class MainActivity : StateActivity<MainState>() {
             textView.text = state.text
         }
     }
-
-    override val state: MainState
-        get() = appState.mainState
 }
