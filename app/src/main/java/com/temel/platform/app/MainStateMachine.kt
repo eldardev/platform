@@ -1,6 +1,7 @@
 package com.temel.platform.app
 
 import com.temel.mvi.viewmodel.StateMachine
+import com.temel.platform.AppState
 import com.temel.platform.app.usecase.GetCatsFactsUseCase
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -9,6 +10,10 @@ import javax.inject.Inject
 
 class MainStateMachine @Inject constructor(private var getCatsFactsUseCase: GetCatsFactsUseCase) :
     StateMachine<MainAction, MainCommand, MainState> {
+
+    @Inject lateinit var appState: AppState
+
+    override fun initialiseState() = appState.mainState
 
     override fun reduce(state: MainState, action: MainAction, ): MainState {
         return when (action) {

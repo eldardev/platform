@@ -7,4 +7,7 @@ class MainViewModel @Inject constructor(override val stateMachine: MainStateMach
     StoreViewModel<MainAction,
             MainCommand,
             MainState>() {
+    init {
+        this.mutableState.postValue(stateMachine.initialiseState())
+    }
 }

@@ -9,12 +9,8 @@ import android.widget.TextView
 import androidx.activity.viewModels
 import com.temel.platform.R
 import com.temel.mvi.ui.activity.StateActivity
-import com.temel.platform.AppState
-import javax.inject.Inject
 
 class MainActivity : StateActivity<MainState>() {
-
-    @Inject lateinit var appState: AppState
 
     override val viewModel by viewModels<MainViewModel> {
         viewModelFactory
@@ -29,8 +25,6 @@ class MainActivity : StateActivity<MainState>() {
 
     override fun onResume() {
         super.onResume()
-
-        viewModel.initState(appState.mainState)
 
         findViewById<Button>(R.id.button).setOnClickListener {
             viewModel.sendCommand(MainCommand.FetchFacts)
