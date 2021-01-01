@@ -31,6 +31,8 @@ class MainActivity : StateActivity<MainState>() {
     override fun onResume() {
         super.onResume()
 
+        viewModel.mutableState.value = appState.mainState
+
         findViewById<Button>(R.id.button).setOnClickListener {
             viewModel.sendCommand(MainCommand.FetchFacts)
         }
