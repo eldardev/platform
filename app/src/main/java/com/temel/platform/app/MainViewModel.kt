@@ -53,9 +53,6 @@ class MainViewModel @Inject constructor(
         return getCatsFactsUseCase.invoke(Unit)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .doOnError {
-                setThrowable(it)
-            }
             .map<MainAction> {
                 MainAction.ChangeText(it.toString())
             }

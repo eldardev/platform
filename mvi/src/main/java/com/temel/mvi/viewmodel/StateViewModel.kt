@@ -1,22 +1,22 @@
 package com.temel.mvi.viewmodel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.temel.mvi.viewstate.ViewState
 
-abstract class StateViewModel<VS : ViewState> : CommonViewModel() {
+abstract class StateViewModel<VS : ViewState> : DisposeBagViewModel() {
 
-    internal val state: MutableLiveData<VS> =
+    private val mutableState: MutableLiveData<VS> =
         MutableLiveData<VS>().apply {
             this.value = null
         }
 
-    internal fun selectState(selectedState: VS){
-        state.value = selectedState
-    }
+    internal val state: LiveData<VS>
+        get() = mutableState
 
     internal fun updateState(viewState: VS?) {
         viewState?.let {
-            state.postValue(viewState)
+            mutableState.postValue(viewState)
         }
     }
 }
