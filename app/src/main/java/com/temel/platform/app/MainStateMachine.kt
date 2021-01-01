@@ -11,7 +11,7 @@ import javax.inject.Inject
 class MainStateMachine @Inject constructor(private var getCatsFactsUseCase: GetCatsFactsUseCase) :
     StateMachine<MainAction, MainCommand, MainState> {
 
-    override fun reduce(action: MainAction, state: MainState): MainState {
+    override fun reduce(state: MainState, action: MainAction, ): MainState {
         return when (action) {
             is MainAction.ChangeText -> {
                 state.apply {

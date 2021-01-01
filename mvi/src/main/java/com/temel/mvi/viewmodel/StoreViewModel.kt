@@ -24,7 +24,7 @@ abstract class StoreViewModel<A : Action, C : Command, VS : ViewState> :
     init {
         action.subscribe { action ->
             state.value?.let { state ->
-                mutableState.postValue(stateMachine.reduce(action, state))
+                mutableState.postValue(stateMachine.reduce(state, action))
             }
         }.disposeLater()
 
