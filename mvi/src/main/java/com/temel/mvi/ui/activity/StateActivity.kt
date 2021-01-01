@@ -19,6 +19,4 @@ abstract class StateActivity<VS : ViewState> : CommonActivity() {
     }
 
     abstract fun onNewState(state: VS)
-
-    abstract fun handleThrowable(throwable: Throwable)
 }

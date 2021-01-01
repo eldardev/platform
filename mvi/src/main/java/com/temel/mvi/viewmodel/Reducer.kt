@@ -5,7 +5,7 @@ import com.temel.mvi.viewstate.Command
 import com.temel.mvi.viewstate.ViewState
 import io.reactivex.Observable
 
-interface StateMachine<A : Action, C : Command, VS : ViewState> {
+interface Reducer<A : Action, C : Command, VS : ViewState> {
 
     fun reduce(state: VS, action: A, ): VS
 
