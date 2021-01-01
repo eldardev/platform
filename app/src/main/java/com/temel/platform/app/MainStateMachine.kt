@@ -1,5 +1,6 @@
 package com.temel.platform.app
 
+import com.temel.mvi.viewmodel.Reducer
 import com.temel.mvi.viewmodel.StateMachine
 import com.temel.platform.app.state.MainState
 import com.temel.platform.app.usecase.GetCatsFactsUseCase
