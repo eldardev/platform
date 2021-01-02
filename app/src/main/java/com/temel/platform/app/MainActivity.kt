@@ -27,7 +27,7 @@ class MainActivity : StateActivity<MainState>() {
         super.onResume()
 
         findViewById<Button>(R.id.button).setOnClickListener {
-            viewModel.sendCommand(MainCommand.FetchFacts)
+            viewModel.dispatch(MainAction.FetchFacts)
         }
     }
 

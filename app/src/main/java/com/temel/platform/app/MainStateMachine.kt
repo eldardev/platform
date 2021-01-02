@@ -8,14 +8,16 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class MainStateMachine @Inject constructor(private var getCatsFactsUseCase: GetCatsFactsUseCase) :
-    StateMachine<MainAction, MainCommand, MainState> {
 
-    @Inject lateinit var appState: AppState
+class MainStateMachine @Inject constructor(private var getCatsFactsUseCase: GetCatsFactsUseCase) :
+    StateMachine<MainAction, MainState> {
+
+    @Inject
+    lateinit var appState: AppState
 
     override fun initialiseState() = appState.mainState
 
-    override fun reduce(state: MainState, action: MainAction, ): MainState {
+    override fun reduce(state: MainState, action: MainAction): MainState {
         return when (action) {
             is MainAction.ChangeText -> {
                 state.apply {
@@ -29,23 +31,26 @@ class MainStateMachine @Inject constructor(private var getCatsFactsUseCase: GetC
                     isLoading = action.isLoading
                 }
             }
+
+            is MainAction.FetchFacts -> state
         }
     }
 
-    override fun call(command: MainCommand): (MainState) -> Observable<MainAction> {
-        return when (command) {
-            is MainCommand.FetchFacts -> ::getFacts
+    private fun getFacts(
+        actions: Observable<MainAction>,
+        state: MainState
+    ): Observable<MainAction> =
+        actions.ofType(MainAction.FetchFacts::class.java).switchMap {
+            getCatsFactsUseCase.invoke(Unit)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .map<MainAction> {
+                    MainAction.ChangeText(it.toString())
+                }
+                .toObservable()
+                .startWith(MainAction.SetLoading(true))
         }
-    }
 
-    private fun getFacts(state: MainState): Observable<MainAction> {
-        return getCatsFactsUseCase.invoke(Unit)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .map<MainAction> {
-                MainAction.ChangeText(it.toString())
-            }
-            .toObservable()
-            .startWith(MainAction.SetLoading(true))
-    }
+    override val sideEffects: List<(actions: Observable<MainAction>, MainState) -> Observable<MainAction>>
+        get() = listOf(::getFacts)
 }

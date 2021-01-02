@@ -5,7 +5,6 @@ import javax.inject.Inject
 
 class MainViewModel @Inject constructor(override val stateMachine: MainStateMachine) :
     StoreViewModel<MainAction,
-            MainCommand,
             MainState>() {
 
     init {
