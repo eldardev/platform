@@ -2,14 +2,12 @@ package com.temel.platform.app.feature.main.state
 
 import com.temel.mvi.viewmodel.StateMachine
 import com.temel.platform.AppState
-import com.temel.platform.app.usecase.GetCatsFactsUseCase
+import com.temel.platform.app.interactor.MainInteractor
 import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 
-class MainStateMachine @Inject constructor(private var getCatsFactsUseCase: GetCatsFactsUseCase) :
+class MainStateMachine @Inject constructor(private var mainInteractor: MainInteractor) :
     StateMachine<MainAction, MainState> {
 
     @Inject
@@ -39,9 +37,7 @@ class MainStateMachine @Inject constructor(private var getCatsFactsUseCase: GetC
         state: MainState
     ): Observable<MainAction> =
         actions.ofType(MainAction.FetchFacts::class.java).switchMap {
-            getCatsFactsUseCase.invoke(Unit)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+            mainInteractor.getFacts()
                 .map<MainAction> {
                     MainAction.ChangeText(it.toString())
                 }
