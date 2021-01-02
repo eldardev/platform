@@ -12,12 +12,14 @@ abstract class StoreViewModel<A : Action, VS : ViewState> :
 
     private val action = BehaviorSubject.create<A>()
 
-    fun dispatch(action: A) {
-        this.action.onNext(action)
+    fun dispatch(action: A) = this.action.onNext(action)
+
+    protected fun setState(state: VS) {
+        mutableState.postValue(state)
     }
 
     init {
-        action.subscribe { action ->
+        this.action.subscribe { action ->
             state.value?.let { state ->
                 mutableState.postValue(stateMachine.reduce(state, action))
 

@@ -8,7 +8,7 @@ abstract class StateViewModel<VS : ViewState> : CommonViewModel() {
     internal val state: LiveData<VS>
         get() = mutableState
 
-    protected val mutableState: MutableLiveData<VS> =
+    internal val mutableState: MutableLiveData<VS> =
         MutableLiveData<VS>().apply {
             this.value = null
         }

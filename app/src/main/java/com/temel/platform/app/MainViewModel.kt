@@ -8,6 +8,6 @@ class MainViewModel @Inject constructor(override val stateMachine: MainStateMach
             MainState>() {
 
     init {
-        mutableState.postValue(stateMachine.initState)
+        setState(stateMachine.initState)
     }
 }
