@@ -20,11 +20,18 @@ abstract class StoreViewModel<A : Action, VS : ViewState> :
 
     init {
         this.action.subscribe { action ->
-            state.value?.let { state ->
-                mutableState.postValue(stateMachine.reduce(state, action))
+            state.value?.let { currentState ->
+
+                val newState = try {
+                    stateMachine.reduce(currentState, action)
+                } catch (error: Throwable) {
+                    this.action.onError(error)
+                    throw ReducerException(state = currentState, action = action, cause = error)
+                }
+                mutableState.postValue(newState)
 
                 stateMachine.sideEffects.forEach {
-                    it(Observable.just(action), state).subscribe {
+                    it(Observable.just(action), currentState).subscribe {
                         this.action.onNext(it)
                     }.disposeLater()
                 }
