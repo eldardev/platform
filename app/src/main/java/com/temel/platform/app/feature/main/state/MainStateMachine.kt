@@ -1,4 +1,4 @@
-package com.temel.platform.app
+package com.temel.platform.app.feature.main.state
 
 import com.temel.mvi.viewmodel.StateMachine
 import com.temel.platform.AppState

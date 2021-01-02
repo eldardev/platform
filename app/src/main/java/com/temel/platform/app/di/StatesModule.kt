@@ -1,7 +1,7 @@
 package com.temel.platform.app.di
 
 import com.temel.platform.AppState
-import com.temel.platform.app.MainState
+import com.temel.platform.app.feature.main.state.MainState
 import dagger.Module
 import dagger.Provides
 

@@ -1,8 +1,8 @@
 package com.temel.platform.app.di
 
 import androidx.lifecycle.ViewModel
-import com.temel.platform.app.MainActivity
-import com.temel.platform.app.MainViewModel
+import com.temel.platform.app.feature.main.MainActivity
+import com.temel.platform.app.feature.main.MainViewModel
 import com.temel.mvi.di.ViewModelKey
 import dagger.Binds
 import dagger.Module

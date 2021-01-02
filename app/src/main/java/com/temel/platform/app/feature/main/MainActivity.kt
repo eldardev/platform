@@ -1,4 +1,4 @@
-package com.temel.platform.app
+package com.temel.platform.app.feature.main
 
 import android.os.Bundle
 import android.view.View.GONE
@@ -9,6 +9,8 @@ import android.widget.TextView
 import androidx.activity.viewModels
 import com.temel.platform.R
 import com.temel.mvi.ui.activity.StateActivity
+import com.temel.platform.app.feature.main.state.MainAction
+import com.temel.platform.app.feature.main.state.MainState
 
 class MainActivity : StateActivity<MainState>() {
 
