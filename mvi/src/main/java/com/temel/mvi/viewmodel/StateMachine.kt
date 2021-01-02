@@ -9,5 +9,5 @@ interface StateMachine<A : Action, VS : ViewState>
 
     val sideEffects: List<(actions: Observable<A>, VS) -> Observable<A>>
 
-    fun initialiseState(): VS
+    val initState: VS
 }

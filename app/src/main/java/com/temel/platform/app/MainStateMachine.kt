@@ -15,8 +15,6 @@ class MainStateMachine @Inject constructor(private var getCatsFactsUseCase: GetC
     @Inject
     lateinit var appState: AppState
 
-    override fun initialiseState() = appState.mainState
-
     override fun reduce(state: MainState, action: MainAction): MainState {
         return when (action) {
             is MainAction.ChangeText -> {
@@ -53,4 +51,7 @@ class MainStateMachine @Inject constructor(private var getCatsFactsUseCase: GetC
 
     override val sideEffects: List<(actions: Observable<MainAction>, MainState) -> Observable<MainAction>>
         get() = listOf(::getFacts)
+
+    override val initState: MainState
+        get() = appState.mainState
 }
