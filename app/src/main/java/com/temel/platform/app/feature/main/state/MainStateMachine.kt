@@ -9,14 +9,13 @@ import javax.inject.Inject
 
 
 class MainStateMachine @Inject constructor(
-    private var mainInteractor: MainInteractor) :
+    private var mainInteractor: MainInteractor,
+    var router: Router
+) :
     StateMachine<MainAction, MainState> {
 
     @Inject
     lateinit var appState: AppState
-
-    @Inject
-    lateinit var router: Router
 
     override fun reduce(state: MainState, action: MainAction): MainState {
         return when (action) {
