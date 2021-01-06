@@ -14,6 +14,7 @@ import com.temel.platform.app.feature.main.state.MainAction
 import com.temel.platform.app.feature.main.state.MainState
 
 class MainFragment : StateFragment<MainState>() {
+
     override val viewModel by viewModels<MainViewModel> {
         viewModelFactory
     }
