@@ -8,15 +8,18 @@ import dagger.android.AndroidInjector
 import dagger.android.support.AndroidSupportInjectionModule
 
 @AppScope
-@Component(modules = [AndroidSupportInjectionModule::class,
-    ViewModelBuilderModule::class,
-    StatesModule::class,
-    AppModule::class
-])
+@Component(
+    modules = [AndroidSupportInjectionModule::class,
+        ViewModelBuilderModule::class,
+        StatesModule::class,
+        AppModule::class,
+        NavigationModule::class
+    ]
+)
 interface MainComponent : AndroidInjector<PlatformApplication> {
 
     @Component.Builder
-    interface Builder{
+    interface Builder {
 
         @BindsInstance
         fun application(application: PlatformApplication): Builder
