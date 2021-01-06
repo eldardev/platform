@@ -13,7 +13,7 @@ import dagger.android.support.AndroidSupportInjectionModule
         ViewModelBuilderModule::class,
         StatesModule::class,
         AppModule::class,
-        NavigationModule::class
+        NavModule::class
     ]
 )
 interface MainComponent : AndroidInjector<PlatformApplication> {

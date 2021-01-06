@@ -1,7 +1,13 @@
 package com.temel.platform.app.coordinator
 
 import androidx.navigation.NavController
+import com.temel.platform.R
 import javax.inject.Inject
 
-class Router @Inject constructor(private val navController: NavController) {
+class Router{
+    lateinit var navController: NavController
+
+    fun openListFragment(){
+        navController.navigate(R.id.listFragment)
+    }
 }

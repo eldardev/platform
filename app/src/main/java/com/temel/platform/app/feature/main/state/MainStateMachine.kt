@@ -2,16 +2,21 @@ package com.temel.platform.app.feature.main.state
 
 import com.temel.mvi.viewmodel.StateMachine
 import com.temel.platform.AppState
+import com.temel.platform.app.coordinator.Router
 import com.temel.platform.app.interactor.MainInteractor
 import io.reactivex.Observable
 import javax.inject.Inject
 
 
-class MainStateMachine @Inject constructor(private var mainInteractor: MainInteractor) :
+class MainStateMachine @Inject constructor(
+    private var mainInteractor: MainInteractor) :
     StateMachine<MainAction, MainState> {
 
     @Inject
     lateinit var appState: AppState
+
+    @Inject
+    lateinit var router: Router
 
     override fun reduce(state: MainState, action: MainAction): MainState {
         return when (action) {
@@ -28,7 +33,11 @@ class MainStateMachine @Inject constructor(private var mainInteractor: MainInter
                 }
             }
 
-            is MainAction.FetchFacts -> state
+            is MainAction.FetchFacts -> {
+
+                router.openListFragment()
+                state
+            }
         }
     }
 
@@ -46,7 +55,8 @@ class MainStateMachine @Inject constructor(private var mainInteractor: MainInter
         }
 
     override val sideEffects: List<(actions: Observable<MainAction>, MainState) -> Observable<MainAction>>
-        get() = listOf(::getFacts)
+//        get() = listOf(::getFacts)
+        get() = listOf()
 
     override val initState: MainState
         get() = appState.mainState
