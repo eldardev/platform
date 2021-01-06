@@ -1,9 +1,10 @@
 package com.temel.platform.app.di
 
 import androidx.lifecycle.ViewModel
-import com.temel.platform.app.feature.main.MainActivity
+import com.temel.platform.app.feature.MainActivity
 import com.temel.platform.app.feature.main.MainViewModel
 import com.temel.mvi.di.ViewModelKey
+import com.temel.platform.app.feature.main.MainFragment
 import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -20,4 +21,6 @@ abstract class MainModule {
     @ContributesAndroidInjector
     abstract fun contributeMainActivity(): MainActivity
 
+    @ContributesAndroidInjector
+    abstract fun contributeMainFragment(): MainFragment
 }
