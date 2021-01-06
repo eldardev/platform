@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.temel.platform.app.feature.MainActivity
 import com.temel.platform.app.feature.main.MainViewModel
 import com.temel.mvi.di.ViewModelKey
+import com.temel.platform.app.feature.list.ListFragment
 import com.temel.platform.app.feature.main.MainFragment
 import dagger.Binds
 import dagger.Module
@@ -11,7 +12,7 @@ import dagger.android.ContributesAndroidInjector
 import dagger.multibindings.IntoMap
 
 @Module
-abstract class MainModule {
+abstract class AppModule {
 
     @Binds
     @IntoMap
@@ -23,4 +24,7 @@ abstract class MainModule {
 
     @ContributesAndroidInjector
     abstract fun contributeMainFragment(): MainFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeListFragment(): ListFragment
 }
