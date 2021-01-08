@@ -2,7 +2,7 @@ package com.temel.platform.app.feature.main.state
 
 import com.temel.mvi.viewmodel.StateMachine
 import com.temel.platform.AppState
-import com.temel.platform.app.coordinator.Router
+import com.temel.platform.app.coordinator.MainCoordinator
 import com.temel.platform.app.interactor.MainInteractor
 import io.reactivex.Observable
 import javax.inject.Inject
@@ -10,7 +10,7 @@ import javax.inject.Inject
 
 class MainStateMachine @Inject constructor(
     private var mainInteractor: MainInteractor,
-    var router: Router
+//    var router: MainCoordinator
 ) :
     StateMachine<MainAction, MainState> {
 
@@ -34,7 +34,7 @@ class MainStateMachine @Inject constructor(
 
             is MainAction.FetchFacts -> {
 
-                router.openListFragment()
+                //router.openListFragment()
                 state
             }
         }
