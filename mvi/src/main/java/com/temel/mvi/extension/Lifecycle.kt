@@ -3,7 +3,6 @@ package com.temel.mvi.extension
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
-import com.temel.mvi.navigation.CoordinatorEvent
 import com.temel.mvi.viewstate.ViewState
 
 fun <L : LiveData<Throwable>> LifecycleOwner.throwable(liveData: L, body: (Throwable?) -> Unit) =
@@ -11,7 +10,4 @@ fun <L : LiveData<Throwable>> LifecycleOwner.throwable(liveData: L, body: (Throw
 
 
 fun <T : ViewState, L : LiveData<T>> LifecycleOwner.renderViewState(liveData: L, body: (T?) -> Unit) =
-        liveData.observe(this, Observer(body))
-
-fun <T : CoordinatorEvent, L : LiveData<T>> LifecycleOwner.observeCoordinatorEvents(liveData: L, body: (T?) -> Unit) =
         liveData.observe(this, Observer(body))

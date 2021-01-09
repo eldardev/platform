@@ -34,7 +34,7 @@ class MainStateMachine @Inject constructor(
 
             is MainAction.FetchFacts -> {
 
-                //mainCoordinator.openListFragment()
+                mainCoordinator.openListFragment()
                 state
             }
         }
