@@ -1,3 +1,5 @@
 package com.temel.mvi.navigation
 
-interface Coordinator
+interface Coordinator{
+    fun onEvent(event: CoordinatorEvent)
+}

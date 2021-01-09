@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.fragment.app.viewModels
 import com.temel.mvi.ui.fragment.StateFragment
 import com.temel.platform.R
+import com.temel.platform.app.feature.MainActivity
 import com.temel.platform.app.feature.main.state.MainAction
 import com.temel.platform.app.feature.main.state.MainState
 

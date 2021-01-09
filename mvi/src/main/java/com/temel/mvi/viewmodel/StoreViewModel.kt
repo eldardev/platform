@@ -13,16 +13,10 @@ abstract class StoreViewModel<A : Action, VS : ViewState> :
 
     private val action = BehaviorSubject.create<A>()
 
-    private val middlewares = mutableListOf<(VS)->Unit>()
-
     fun dispatch(action: A) = this.action.onNext(action)
 
     protected fun setState(state: VS) {
         mutableState.postValue(state)
-    }
-
-    protected fun addMiddleWare(f:(VS)->Unit){
-        middlewares.add(f)
     }
 
     init {
@@ -42,10 +36,6 @@ abstract class StoreViewModel<A : Action, VS : ViewState> :
     }
 
     private fun reduceNewState(currentState: VS, action: A): VS {
-        middlewares.forEach {
-            it(currentState)
-        }
-
         return try {
             Timber.d("Reducer reacts on $action. Current State $currentState")
             stateMachine.reduce(currentState, action)

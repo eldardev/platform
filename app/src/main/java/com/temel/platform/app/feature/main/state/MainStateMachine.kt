@@ -10,7 +10,7 @@ import javax.inject.Inject
 
 class MainStateMachine @Inject constructor(
     private var mainInteractor: MainInteractor,
-//    var router: MainCoordinator
+    private val mainCoordinator: MainCoordinator
 ) :
     StateMachine<MainAction, MainState> {
 
@@ -34,7 +34,7 @@ class MainStateMachine @Inject constructor(
 
             is MainAction.FetchFacts -> {
 
-                //router.openListFragment()
+                //mainCoordinator.openListFragment()
                 state
             }
         }

@@ -8,17 +8,10 @@ import javax.inject.Inject
 
 class MainViewModel @Inject constructor(
     override val stateMachine: MainStateMachine
-) :
-    StoreViewModel<MainAction,
+) : StoreViewModel<MainAction,
             MainState>() {
 
     init {
         setState(stateMachine.initState)
-
-        addMiddleWare(::test)
-    }
-
-    private fun test(state: MainState) {
-        println()
     }
 }
