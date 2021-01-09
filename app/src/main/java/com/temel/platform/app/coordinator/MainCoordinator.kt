@@ -1,19 +1,12 @@
 package com.temel.platform.app.coordinator
 
 import com.temel.mvi.navigation.Coordinator
+import com.temel.platform.R
 import javax.inject.Inject
 
-class MainCoordinator @Inject constructor(val mainNavigator: MainNavigator): Coordinator {
+class MainCoordinator @Inject constructor(val mainNavigator: MainNavigator): Coordinator() {
 
     fun openListFragment() {
-
+        navController?.navigate(R.id.listFragment)
     }
-
-//    fun start(){
-//        navigator.showNewsList()
-//    }
-//
-//    fun readNewsArticle(id : Int){
-//        navigator.showNewsArticle(id)
-//    }
 }
