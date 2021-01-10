@@ -5,7 +5,6 @@ import com.temel.platform.R
 import com.temel.platform.app.coordinator.MainCoordinator
 import javax.inject.Inject
 
-
 class MainActivity : NavigationActivity<MainCoordinator>() {
 
     @Inject lateinit var mainCoordinator: MainCoordinator
