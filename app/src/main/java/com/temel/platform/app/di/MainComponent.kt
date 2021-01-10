@@ -11,7 +11,6 @@ import dagger.android.support.AndroidSupportInjectionModule
 @Component(
     modules = [AndroidSupportInjectionModule::class,
         ViewModelBuilderModule::class,
-        StatesModule::class,
         AppModule::class,
     ]
 )
