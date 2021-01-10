@@ -5,12 +5,16 @@ import android.os.PersistableBundle
 import androidx.navigation.fragment.NavHostFragment
 import com.temel.mvi.navigation.Coordinator
 
-abstract class NavigationActivity<C : Coordinator> (private val navFragmentId: Int) : AppDaggerActivity() {
+abstract class NavigationActivity<C : Coordinator> () : AppDaggerActivity() {
 
     abstract val coordinator: C
 
-    override fun onPostCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onPostCreate(savedInstanceState, persistentState)
+    abstract val layoutId: Int
+    abstract val navFragmentId: Int
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(layoutId)
 
         val navHostFragment =
             supportFragmentManager.findFragmentById(navFragmentId) as NavHostFragment

@@ -9,7 +9,7 @@ import javax.inject.Inject
 class MainCoordinator @Inject constructor(): Coordinator() {
 
     fun openListFragment() {
-        println()
-//        navController?.navigate(R.id.listFragment)
+
+        navController?.navigate(R.id.listFragment)
     }
 }

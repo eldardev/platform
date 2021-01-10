@@ -9,15 +9,16 @@ import com.temel.platform.app.coordinator.MainCoordinator
 import javax.inject.Inject
 
 
-class MainActivity: NavigationActivity<MainCoordinator>(R.id.nav_host_fragment) {
+class MainActivity : NavigationActivity<MainCoordinator>() {
 
     @Inject lateinit var mainCoordinator: MainCoordinator
 
     override val coordinator: MainCoordinator
     get() = mainCoordinator
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-    }
+    override val layoutId: Int
+        get() = R.layout.activity_main
+
+    override val navFragmentId: Int
+        get() = R.id.nav_host_fragment
 }
