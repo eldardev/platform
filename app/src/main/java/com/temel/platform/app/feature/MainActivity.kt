@@ -1,8 +1,5 @@
 package com.temel.platform.app.feature
 
-import android.os.Bundle
-import androidx.navigation.fragment.NavHostFragment
-import com.temel.mvi.ui.activity.CommonActivity
 import com.temel.mvi.ui.activity.NavigationActivity
 import com.temel.platform.R
 import com.temel.platform.app.coordinator.MainCoordinator
