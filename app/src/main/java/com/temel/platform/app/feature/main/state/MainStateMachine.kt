@@ -2,7 +2,7 @@ package com.temel.platform.app.feature.main.state
 
 import com.temel.mvi.viewmodel.StateMachine
 import com.temel.platform.AppState
-import com.temel.platform.app.coordinator.MainCoordinator
+import com.temel.platform.app.feature.navigation.MainCoordinator
 import com.temel.platform.app.interactor.MainInteractor
 import io.reactivex.Observable
 import javax.inject.Inject

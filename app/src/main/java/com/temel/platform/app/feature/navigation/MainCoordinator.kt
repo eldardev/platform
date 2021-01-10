@@ -1,4 +1,4 @@
-package com.temel.platform.app.coordinator
+package com.temel.platform.app.feature.navigation
 
 import com.temel.mvi.navigation.Coordinator
 import com.temel.platform.R

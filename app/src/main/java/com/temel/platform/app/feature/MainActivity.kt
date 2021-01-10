@@ -2,7 +2,7 @@ package com.temel.platform.app.feature
 
 import com.temel.mvi.ui.activity.NavigationActivity
 import com.temel.platform.R
-import com.temel.platform.app.coordinator.MainCoordinator
+import com.temel.platform.app.feature.navigation.MainCoordinator
 import javax.inject.Inject
 
 class MainActivity : NavigationActivity<MainCoordinator>() {
@@ -15,6 +15,6 @@ class MainActivity : NavigationActivity<MainCoordinator>() {
     override val layoutId: Int
         get() = R.layout.activity_main
 
-    override val navFragmentId: Int
+    override val navHostId: Int
         get() = R.id.nav_host_fragment
 }
