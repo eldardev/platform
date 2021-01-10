@@ -4,9 +4,10 @@ import com.temel.mvi.navigation.Coordinator
 import com.temel.platform.R
 import javax.inject.Inject
 
-class MainCoordinator @Inject constructor(val mainNavigator: MainNavigator): Coordinator() {
+class MainCoordinator @Inject constructor(): Coordinator() {
 
     fun openListFragment() {
-        navController?.navigate(R.id.listFragment)
+        println()
+//        navController?.navigate(R.id.listFragment)
     }
 }
