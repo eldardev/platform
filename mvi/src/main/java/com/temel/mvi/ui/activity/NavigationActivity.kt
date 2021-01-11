@@ -4,10 +4,9 @@ import android.os.Bundle
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import com.temel.mvi.navigation.Coordinator
+import com.temel.mvi.navigation.CoordinatorHost
 
-abstract class NavigationActivity<C : Coordinator> () : AppDaggerActivity() {
-
-    abstract val coordinator: C
+abstract class NavigationActivity<C : Coordinator> : AppDaggerActivity(), CoordinatorHost<C> {
 
     abstract val layoutId: Int
     abstract val navHostId: Int
