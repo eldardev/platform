@@ -1,7 +1,6 @@
 package com.temel.platform.app.feature.main
 
 import com.temel.mvi.viewmodel.StoreViewModel
-import com.temel.platform.AppState
 import com.temel.platform.app.feature.navigation.MainCoordinator
 import com.temel.platform.app.interactor.MainInteractor
 import io.reactivex.Observable
@@ -9,14 +8,9 @@ import javax.inject.Inject
 
 class MainViewModel @Inject constructor(
     private val mainInteractor: MainInteractor,
-    private val mainCoordinator: MainCoordinator,
-    private val appState: AppState
+    private val mainCoordinator: MainCoordinator
 ) : StoreViewModel<MainAction,
         MainState>() {
-
-    init {
-        setState(appState.mainState)
-    }
 
     override fun reduce(state: MainState, action: MainAction): MainState {
         return when (action) {
@@ -50,16 +44,17 @@ class MainViewModel @Inject constructor(
         actions: Observable<MainAction>,
         state: MainState
     ): Observable<MainAction> =
-        actions.ofType(MainAction.FetchFacts::class.java).switchMap {
-            mainInteractor.getFacts()
-                .map<MainAction> {
-                    MainAction.ChangeText(it.toString())
-                }
-                .toObservable()
-                .startWith(MainAction.Loading)
-        }
+        actions.ofType(MainAction.FetchFacts::class.java)
+            .switchMap {
+                mainInteractor.getFacts()
+                    .map<MainAction> {
+                        MainAction.ChangeText(it.toString())
+                    }
+                    .toObservable()
+                    .startWith(MainAction.Loading)
+            }
 
     override val sideEffects: List<(actions: Observable<MainAction>, MainState) -> Observable<MainAction>>
-                get() = listOf(::getFacts)
+        get() = listOf(::getFacts)
 //        get() = listOf()
 }

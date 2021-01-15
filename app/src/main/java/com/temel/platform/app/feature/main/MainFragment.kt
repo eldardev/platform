@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.google.android.material.snackbar.Snackbar
 import com.temel.mvi.ui.fragment.StateFragment
