@@ -10,10 +10,11 @@ android {
     buildToolsVersion "29.0.3"
 
     defaultConfig {
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -53,6 +54,8 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
+    implementation 'androidx.multidex:multidex:2.0.1'
+
     //dagger
     api "com.google.dagger:dagger:$dagger_version"
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
@@ -65,6 +68,8 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxandroid:$rx_android_version"
     // RxJava
     implementation "io.reactivex.rxjava2:rxjava:$rx_java_version"
+
+    implementation 'com.jakewharton.rxrelay3:rxrelay:3.0.0'
     // Rx-Retrofit Call Adapter
     implementation "com.squareup.retrofit2:adapter-rxjava2:$rx_call_adapter_version"
 

@@ -45,7 +45,6 @@ abstract class StoreViewModel<A : Action, VS : ViewState> :
             Timber.d("Reducer reacts on $action. Current State $currentState")
             reduce(currentState, action)
         } catch (error: Throwable) {
-            this.action.onError(error)
             throw ReducerException(state = currentState, action = action, cause = error)
         }
     }

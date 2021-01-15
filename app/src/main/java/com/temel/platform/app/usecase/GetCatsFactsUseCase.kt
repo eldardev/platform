@@ -11,7 +11,7 @@ import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class GetCatsFactsUseCase @Inject constructor(
-    var apiServiceProvider: ApiServiceProvider
+    private var apiServiceProvider: ApiServiceProvider
 ) : UseCase<MainAction, MainState> {
     override fun invoke(
         action: Observable<MainAction>,
