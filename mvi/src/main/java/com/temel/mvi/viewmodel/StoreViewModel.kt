@@ -16,36 +16,9 @@ abstract class StoreViewModel<A : Action, VS : ViewState> :
     fun dispatch(action: A) = this.action.onNext(action)
 
     init {
-
-//        action.distinctUntilChanged()
-//            .subscribe(
-//                { action ->
-//                    state.value?.let { currentState ->
-//
-//                        val newState = reduceNewState(currentState, action)
-//                        mutableState.postValue(newState)
-//
-//                        middleWares.forEach {
-//                            it(Observable.just(action), currentState).subscribe(
-//                                {
-//                                    this.action.onNext(it)
-//                                },
-//                                {
-//                                    this.throwable.postValue(it)
-//                                }
-//                            ).disposeLater()
-//                        }
-//                    }
-//                },
-//                {
-//                    throwable.postValue(it)
-//                }
-//            ).disposeLater()
-
-
         action.distinctUntilChanged().map {
             reduceNewState(state.value!!, it)
-        }.subscribe (::setState).disposeLater()
+        }.subscribe(::setState).disposeLater()
     }
 
     private fun reduceNewState(currentState: VS, action: A): VS {
