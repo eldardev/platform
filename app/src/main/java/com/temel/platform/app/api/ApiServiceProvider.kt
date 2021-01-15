@@ -10,17 +10,12 @@ import timber.log.Timber
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
-class ApiClient @Inject constructor() {
+class ApiServiceProvider @Inject constructor() {
     companion object {
         const val TIMEOUT: Long = 10
     }
 
-    inline fun <reified ApiService> getService(baseUrl: String): ApiService {
-        return create<ApiService>(baseUrl)
-    }
-
-    inline fun <reified T> create(baseUrl: String): T {
-
+    inline fun <reified ApiService> get(baseUrl: String): ApiService {
         val httpLoggingInterceptor =
             HttpLoggingInterceptor { message -> Timber.tag("okHttp").d(message) }
 
@@ -40,6 +35,6 @@ class ApiClient @Inject constructor() {
             .client(client)
             .build()
 
-        return retrofit.create(T::class.java)
+        return retrofit.create(ApiService::class.java)
     }
 }
