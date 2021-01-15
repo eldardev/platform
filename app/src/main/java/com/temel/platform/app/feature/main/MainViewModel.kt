@@ -26,10 +26,16 @@ class MainViewModel @Inject constructor(
                     isLoading = false
                 }
             }
-            is MainAction.SetLoading -> {
+            is MainAction.Loading -> {
                 state.apply {
                     text = ""
-                    isLoading = action.isLoading
+                    isLoading = true
+                }
+            }
+
+            is MainAction.Loaded -> {
+                state.apply {
+                    isLoading = false
                 }
             }
 
@@ -50,7 +56,7 @@ class MainViewModel @Inject constructor(
                     MainAction.ChangeText(it.toString())
                 }
                 .toObservable()
-                .startWith(MainAction.SetLoading(true))
+                .startWith(MainAction.Loading)
         }
 
     override val sideEffects: List<(actions: Observable<MainAction>, MainState) -> Observable<MainAction>>

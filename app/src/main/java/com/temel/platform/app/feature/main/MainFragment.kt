@@ -55,7 +55,7 @@ class MainFragment : StateFragment<MainState>() {
     }
 
     override fun handleThrowable(throwable: Throwable) {
-        viewModel.dispatch(MainAction.SetLoading(false))
+        viewModel.dispatch(MainAction.Loaded)
         Snackbar.make(requireView(), "Exception", Snackbar.LENGTH_LONG).show()
     }
 }
