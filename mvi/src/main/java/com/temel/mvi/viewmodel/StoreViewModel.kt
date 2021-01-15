@@ -40,10 +40,6 @@ abstract class StoreViewModel<A : Action, VS : ViewState> :
         ).disposeLater()
     }
 
-    protected fun setState(state: VS) {
-        mutableState.postValue(state)
-    }
-
     private fun reduceNewState(currentState: VS, action: A): VS {
         return try {
             Timber.d("Reducer reacts on $action. Current State $currentState")
