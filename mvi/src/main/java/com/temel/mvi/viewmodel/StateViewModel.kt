@@ -10,11 +10,13 @@ abstract class StateViewModel<VS : ViewState> : CommonViewModel() {
 
     internal val mutableState: MutableLiveData<VS> =
         MutableLiveData<VS>().apply {
-            this.value = null
+            this.value = initState()
         }
 
     internal val throwable: MutableLiveData<Throwable> =
         MutableLiveData<Throwable>().apply {
-        this.value = null
-    }
+            this.value = null
+        }
+
+    abstract fun initState(): VS
 }

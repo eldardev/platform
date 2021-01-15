@@ -18,10 +18,6 @@ class MainViewModel @Inject constructor(
 ) : StoreViewModel<MainAction,
         MainState>() {
 
-    init {
-        setState(MainState())
-    }
-
     override fun reduce(state: MainState, action: MainAction): MainState {
         return when (action) {
             is MainAction.ChangeText -> {
@@ -52,5 +48,7 @@ class MainViewModel @Inject constructor(
 
     override val middleWares: List<(actions: Observable<MainAction>, MainState) -> Observable<MainAction>>
         get() = listOf(getCatsFactsUseCase::invoke)
-//        get() = listOf()
+    //        get() = listOf()
+
+    override fun initState() = MainState()
 }
