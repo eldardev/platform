@@ -9,19 +9,12 @@ import timber.log.Timber
 abstract class StoreViewModel<A : Action, VS : ViewState> :
     StateViewModel<VS>(), StateMachine<A, VS> {
 
-    init {
-        setState()
-    }
-
     private val action = BehaviorSubject.create<A>()
 
     fun dispatch(action: A) = this.action.onNext(action)
 
-    protected fun setState() {
-        mutableState.postValue(initState)
-    }
-
     init {
+
         this.action.subscribe { action ->
             state.value?.let { currentState ->
 
@@ -35,6 +28,10 @@ abstract class StoreViewModel<A : Action, VS : ViewState> :
                 }
             }
         }.disposeLater()
+    }
+
+    protected fun setState(state:VS){
+        mutableState.postValue(state)
     }
 
     private fun reduceNewState(currentState: VS, action: A): VS {
