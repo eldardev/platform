@@ -1,4 +1,4 @@
-package com.temel.platform.app.feature.main.state
+package com.temel.platform.app.feature.main
 
 import com.temel.mvi.viewstate.Action
 

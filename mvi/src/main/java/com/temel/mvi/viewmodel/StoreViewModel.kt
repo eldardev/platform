@@ -7,16 +7,18 @@ import io.reactivex.subjects.BehaviorSubject
 import timber.log.Timber
 
 abstract class StoreViewModel<A : Action, VS : ViewState> :
-    StateViewModel<VS>() {
+    StateViewModel<VS>(), StateMachine<A, VS> {
 
-    abstract val stateMachine: StateMachine<A, VS>
+    init {
+        setState()
+    }
 
     private val action = BehaviorSubject.create<A>()
 
     fun dispatch(action: A) = this.action.onNext(action)
 
-    protected fun setState(state: VS) {
-        mutableState.postValue(state)
+    protected fun setState() {
+        mutableState.postValue(initState)
     }
 
     init {
@@ -26,7 +28,7 @@ abstract class StoreViewModel<A : Action, VS : ViewState> :
                 val newState = reduceNewState(currentState, action)
                 mutableState.postValue(newState)
 
-                stateMachine.sideEffects.forEach {
+                sideEffects.forEach {
                     it(Observable.just(action), currentState).subscribe {
                         this.action.onNext(it)
                     }.disposeLater()
@@ -38,7 +40,7 @@ abstract class StoreViewModel<A : Action, VS : ViewState> :
     private fun reduceNewState(currentState: VS, action: A): VS {
         return try {
             Timber.d("Reducer reacts on $action. Current State $currentState")
-            stateMachine.reduce(currentState, action)
+            reduce(currentState, action)
         } catch (error: Throwable) {
             this.action.onError(error)
             throw ReducerException(state = currentState, action = action, cause = error)

@@ -9,10 +9,9 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.fragment.app.viewModels
 import com.temel.mvi.ui.fragment.StateFragment
+import com.temel.mvi.viewstate.ViewState
 import com.temel.platform.R
-import com.temel.platform.app.feature.MainActivity
-import com.temel.platform.app.feature.main.state.MainAction
-import com.temel.platform.app.feature.main.state.MainState
+import javax.inject.Inject
 
 class MainFragment : StateFragment<MainState>() {
 
@@ -52,4 +51,9 @@ class MainFragment : StateFragment<MainState>() {
             }
         }
     }
+}
+
+class MainState @Inject constructor() : ViewState {
+    var text: String = "Initial text"
+    var isLoading: Boolean = false
 }
