@@ -22,7 +22,7 @@ abstract class StoreViewModel<A : Action, VS : ViewState> :
                     val newState = reduceNewState(currentState, action)
                     mutableState.postValue(newState)
 
-                    sideEffects.forEach {
+                    middleWares.forEach {
                         it(Observable.just(action), currentState).subscribe(
                             {
                                 this.action.onNext(it)

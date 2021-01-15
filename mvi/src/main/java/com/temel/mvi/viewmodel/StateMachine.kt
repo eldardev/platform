@@ -7,5 +7,5 @@ import io.reactivex.Observable
 interface StateMachine<A : Action, VS : ViewState>
     : Reducer<A, VS> {
 
-    val sideEffects: List<(actions: Observable<A>, VS) -> Observable<A>>
+    val middleWares: List<(actions: Observable<A>, VS) -> Observable<A>>
 }

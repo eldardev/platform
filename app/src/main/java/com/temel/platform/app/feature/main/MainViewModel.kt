@@ -3,7 +3,7 @@ package com.temel.platform.app.feature.main
 import com.temel.mvi.viewmodel.StoreViewModel
 import com.temel.mvi.viewstate.ViewState
 import com.temel.platform.app.feature.navigation.MainCoordinator
-import com.temel.platform.app.interactor.MainInteractor
+import com.temel.platform.app.usecase.GetCatsFactsUseCase
 import io.reactivex.Observable
 import javax.inject.Inject
 
@@ -13,7 +13,7 @@ data class MainState(
 ) : ViewState
 
 class MainViewModel @Inject constructor(
-    private val mainInteractor: MainInteractor,
+    private val getCatsFactsUseCase: GetCatsFactsUseCase,
     private val mainCoordinator: MainCoordinator
 ) : StoreViewModel<MainAction,
         MainState>() {
@@ -50,21 +50,7 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    private fun getFacts(
-        actions: Observable<MainAction>,
-        state: MainState
-    ): Observable<MainAction> =
-        actions.ofType(MainAction.FetchFacts::class.java)
-            .switchMap {
-                mainInteractor.getFacts()
-                    .map<MainAction> {
-                        MainAction.ChangeText(it.toString())
-                    }
-                    .toObservable()
-                    .startWith(MainAction.Loading)
-            }
-
-    override val sideEffects: List<(actions: Observable<MainAction>, MainState) -> Observable<MainAction>>
-        get() = listOf(::getFacts)
+    override val middleWares: List<(actions: Observable<MainAction>, MainState) -> Observable<MainAction>>
+        get() = listOf(getCatsFactsUseCase::invoke)
 //        get() = listOf()
 }
