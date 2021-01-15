@@ -27,15 +27,15 @@ abstract class StoreViewModel<A : Action, VS : ViewState> :
                             {
                                 this.action.onNext(it)
                             },
-                            { throwable ->
-                                this.action.onError(throwable)
+                            {
+                                this.throwable.postValue(it)
                             }
                         ).disposeLater()
                     }
                 }
             },
             {
-              throwable.postValue(it)
+                throwable.postValue(it)
             }
         ).disposeLater()
     }

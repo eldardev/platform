@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.viewModels
+import com.google.android.material.snackbar.Snackbar
 import com.temel.mvi.ui.fragment.StateFragment
 import com.temel.mvi.viewstate.ViewState
 import com.temel.platform.R
@@ -53,7 +55,8 @@ class MainFragment : StateFragment<MainState>() {
     }
 
     override fun handleThrowable(throwable: Throwable) {
-        println()
+        viewModel.dispatch(MainAction.SetLoading(false))
+        Snackbar.make(requireView(), "Exception", Snackbar.LENGTH_LONG).show()
     }
 }
 
