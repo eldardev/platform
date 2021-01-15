@@ -1,5 +1,6 @@
 package com.temel.platform.app.feature.main
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,9 +11,7 @@ import android.widget.TextView
 import androidx.fragment.app.viewModels
 import com.google.android.material.snackbar.Snackbar
 import com.temel.mvi.ui.fragment.StateFragment
-import com.temel.mvi.viewstate.ViewState
 import com.temel.platform.R
-import javax.inject.Inject
 
 class MainFragment : StateFragment<MainState>() {
 
@@ -58,8 +57,3 @@ class MainFragment : StateFragment<MainState>() {
         Snackbar.make(requireView(), "Exception", Snackbar.LENGTH_LONG).show()
     }
 }
-
-data class MainState(
-    var text: String = "Initial text",
-    var isLoading: Boolean = false
-) : ViewState

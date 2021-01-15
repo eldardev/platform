@@ -1,10 +1,16 @@
 package com.temel.platform.app.feature.main
 
 import com.temel.mvi.viewmodel.StoreViewModel
+import com.temel.mvi.viewstate.ViewState
 import com.temel.platform.app.feature.navigation.MainCoordinator
 import com.temel.platform.app.interactor.MainInteractor
 import io.reactivex.Observable
 import javax.inject.Inject
+
+data class MainState(
+    var text: String = "Initial text",
+    var isLoading: Boolean = false
+) : ViewState
 
 class MainViewModel @Inject constructor(
     private val mainInteractor: MainInteractor,
