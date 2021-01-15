@@ -12,6 +12,10 @@ class MainViewModel @Inject constructor(
 ) : StoreViewModel<MainAction,
         MainState>() {
 
+    init {
+        setState(MainState())
+    }
+
     override fun reduce(state: MainState, action: MainAction): MainState {
         return when (action) {
             is MainAction.ChangeText -> {

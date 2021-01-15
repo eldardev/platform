@@ -49,4 +49,8 @@ abstract class StoreViewModel<A : Action, VS : ViewState> :
             throw ReducerException(state = currentState, action = action, cause = error)
         }
     }
+
+    protected fun setState(state:VS){
+        mutableState.postValue(state)
+    }
 }

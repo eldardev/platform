@@ -43,10 +43,10 @@ class MainFragment : StateFragment<MainState>() {
             val progress = it.findViewById<ProgressBar>(R.id.progress_bar)
             val textView = it.findViewById<TextView>(R.id.text_hello_world)
 
-            if(state.isLoading) {
+            if (state.isLoading) {
                 progress.visibility = View.VISIBLE
                 textView.text = ""
-            }else{
+            } else {
                 progress.visibility = View.GONE
                 textView.text = state.text
             }
@@ -59,7 +59,7 @@ class MainFragment : StateFragment<MainState>() {
     }
 }
 
-class MainState @Inject constructor() : ViewState {
-    var text: String = "Initial text"
+data class MainState(
+    var text: String = "Initial text",
     var isLoading: Boolean = false
-}
+) : ViewState
