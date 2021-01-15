@@ -34,8 +34,7 @@ class MainViewModel @Inject constructor(
             }
 
             is MainAction.FetchFacts -> {
-
-                mainCoordinator.openListFragment()
+//                mainCoordinator.openListFragment()
                 state
             }
         }
@@ -55,6 +54,6 @@ class MainViewModel @Inject constructor(
         }
 
     override val sideEffects: List<(actions: Observable<MainAction>, MainState) -> Observable<MainAction>>
-        //        get() = listOf(::getFacts)
-        get() = listOf()
+                get() = listOf(::getFacts)
+//        get() = listOf()
 }

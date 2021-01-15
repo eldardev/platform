@@ -51,6 +51,10 @@ class MainFragment : StateFragment<MainState>() {
             }
         }
     }
+
+    override fun handleThrowable(throwable: Throwable) {
+        println()
+    }
 }
 
 class MainState @Inject constructor() : ViewState {

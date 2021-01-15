@@ -4,10 +4,12 @@ import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.findNavController
 import com.temel.mvi.extension.renderViewState
+import com.temel.mvi.extension.throwable
+import com.temel.mvi.viewmodel.StateEvent
 import com.temel.mvi.viewmodel.StateViewModel
 import com.temel.mvi.viewstate.ViewState
 
-abstract class StateFragment<VS: ViewState> : CommonFragment() {
+abstract class StateFragment<VS: ViewState> : CommonFragment(), StateEvent<VS> {
 
     abstract val viewModel : StateViewModel<VS>
 
@@ -19,7 +21,11 @@ abstract class StateFragment<VS: ViewState> : CommonFragment() {
                 onNewState(it)
             }
         })
-    }
 
-    abstract fun onNewState(state: VS)
+        throwable(viewModel.throwable, {
+            it?.let {
+                handleThrowable(it)
+            }
+        })
+    }
 }

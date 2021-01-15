@@ -15,22 +15,32 @@ abstract class StoreViewModel<A : Action, VS : ViewState> :
 
     init {
 
-        this.action.subscribe { action ->
-            state.value?.let { currentState ->
+        this.action.subscribe(
+            { action ->
+                state.value?.let { currentState ->
 
-                val newState = reduceNewState(currentState, action)
-                mutableState.postValue(newState)
+                    val newState = reduceNewState(currentState, action)
+                    mutableState.postValue(newState)
 
-                sideEffects.forEach {
-                    it(Observable.just(action), currentState).subscribe {
-                        this.action.onNext(it)
-                    }.disposeLater()
+                    sideEffects.forEach {
+                        it(Observable.just(action), currentState).subscribe(
+                            {
+                                this.action.onNext(it)
+                            },
+                            { throwable ->
+                                this.action.onError(throwable)
+                            }
+                        ).disposeLater()
+                    }
                 }
+            },
+            {
+              throwable.postValue(it)
             }
-        }.disposeLater()
+        ).disposeLater()
     }
 
-    protected fun setState(state:VS){
+    protected fun setState(state: VS) {
         mutableState.postValue(state)
     }
 
