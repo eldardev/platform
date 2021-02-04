@@ -50,11 +50,11 @@ class MainFragment : StateFragment<MainState>() {
                 textView.text = state.text
             }
 
-            if (state.isNavigate){
-                Handler().postDelayed({
-                    viewModel.dispatch(MainAction.ToList)
-                }, 3000)
-            }
+//            if (state.isNavigate){
+//                Handler().postDelayed({
+//                    viewModel.dispatch(MainAction.ToList)
+//                }, 3000)
+//            }
         }
     }
 

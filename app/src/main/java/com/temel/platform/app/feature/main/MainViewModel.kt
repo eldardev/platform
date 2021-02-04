@@ -4,6 +4,7 @@ import com.temel.mvi.viewmodel.StoreViewModel
 import com.temel.mvi.viewstate.ViewState
 import com.temel.platform.app.feature.navigation.MainCoordinator
 import com.temel.platform.app.usecase.GetCatsFactsUseCase
+import com.temel.platform.app.usecase.GetCatsFactsUseCase2
 import io.reactivex.Observable
 import javax.inject.Inject
 
@@ -14,7 +15,7 @@ data class MainState(
 ) : ViewState
 
 class MainViewModel @Inject constructor(
-    private val getCatsFactsUseCase: GetCatsFactsUseCase,
+    private val getCatsFactsUseCase: GetCatsFactsUseCase2,
     private val mainCoordinator: MainCoordinator
 ) : StoreViewModel<MainAction,
         MainState>() {
