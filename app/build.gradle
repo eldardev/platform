@@ -36,6 +36,7 @@ android {
 
     buildFeatures {
         viewBinding true
+        dataBinding true
     }
 }
 
@@ -99,4 +100,9 @@ dependencies {
     // Kotlin
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+
+    //BindingCollectionAdapter
+    implementation 'me.tatarka.bindingcollectionadapter2:bindingcollectionadapter:4.0.0'
+    implementation 'me.tatarka.bindingcollectionadapter2:bindingcollectionadapter-recyclerview:4.0.0'
+    implementation 'me.tatarka.bindingcollectionadapter2:bindingcollectionadapter-viewpager2:4.0.0'
 }

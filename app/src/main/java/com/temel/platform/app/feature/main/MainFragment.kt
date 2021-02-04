@@ -1,6 +1,5 @@
 package com.temel.platform.app.feature.main
 
-import android.app.Activity
 import android.os.Bundle
 import android.os.Handler
 import android.view.LayoutInflater
@@ -13,7 +12,6 @@ import androidx.fragment.app.viewModels
 import com.google.android.material.snackbar.Snackbar
 import com.temel.mvi.ui.fragment.StateFragment
 import com.temel.platform.R
-import java.util.*
 
 class MainFragment : StateFragment<MainState>() {
 

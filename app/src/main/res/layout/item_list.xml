@@ -1,0 +1,12 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable name="itemString" type="String"/>
+    </data>
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:text="@{itemString}"/>
+</layout>
