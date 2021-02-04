@@ -9,7 +9,8 @@ import javax.inject.Inject
 
 data class MainState(
     var text: String = "Initial text",
-    var isLoading: Boolean = false
+    var isLoading: Boolean = false,
+    var isNavigate: Boolean = false
 ) : ViewState
 
 class MainViewModel @Inject constructor(
@@ -40,7 +41,12 @@ class MainViewModel @Inject constructor(
             }
 
             is MainAction.FetchFacts -> {
-//                mainCoordinator.openListFragment()
+                state.apply {
+                    isNavigate = true
+                }
+            }
+            MainAction.ToList -> {
+                mainCoordinator.openListFragment()
                 state
             }
         }
@@ -48,7 +54,6 @@ class MainViewModel @Inject constructor(
 
     override val middleWares: List<(actions: Observable<MainAction>, MainState) -> Observable<MainAction>>
         get() = listOf(getCatsFactsUseCase::invoke)
-    //        get() = listOf()
 
     override fun initState() = MainState()
 }

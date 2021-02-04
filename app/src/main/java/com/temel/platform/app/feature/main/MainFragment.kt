@@ -2,6 +2,7 @@ package com.temel.platform.app.feature.main
 
 import android.app.Activity
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,7 @@ import androidx.fragment.app.viewModels
 import com.google.android.material.snackbar.Snackbar
 import com.temel.mvi.ui.fragment.StateFragment
 import com.temel.platform.R
+import java.util.*
 
 class MainFragment : StateFragment<MainState>() {
 
@@ -48,6 +50,12 @@ class MainFragment : StateFragment<MainState>() {
             } else {
                 progress.visibility = View.GONE
                 textView.text = state.text
+            }
+
+            if (state.isNavigate){
+                Handler().postDelayed({
+                    viewModel.dispatch(MainAction.ToList)
+                }, 3000)
             }
         }
     }

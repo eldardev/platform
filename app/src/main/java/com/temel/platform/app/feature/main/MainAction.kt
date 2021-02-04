@@ -7,4 +7,5 @@ sealed class MainAction : Action {
     object Loading : MainAction()
     object Loaded : MainAction()
     object FetchFacts : MainAction()
+    object ToList : MainAction()
 }
